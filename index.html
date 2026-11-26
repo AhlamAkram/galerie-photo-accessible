@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma galerie de photos interactive</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #image {
+            width: 600px;
+            height: 400px;
+            margin: 20px auto;
+            background-color: #ddd;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #333;
+            border: 2px solid #333;
+        }
+
+        .gallery {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        figure {
+            margin: 0;
+        }
+
+        figure:focus {
+            outline: 4px solid blue;
+            outline-offset: 3px;
+        }
+
+        figure img {
+            width: 150px;
+            height: 110px;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid #555;
+        }
+
+        @media (max-width: 650px) {
+            #image {
+                width: 95%;
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+
+<body onload="addTabindex()">
+
+    <h1>Ma galerie de photos</h1>
+
+    <div id="image">
+        Passez votre souris ou utilisez le clavier
+    </div>
+
+    <div class="gallery">
+
+        <figure onfocus="upDate(this.querySelector('img'))"
+                onblur="undo()">
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
+                alt="Une magnifique plage avec une eau turquoise"
+                onmouseover="upDate(this)"
+                onmouseleave="undo()">
+        </figure>
+
+        <figure onfocus="upDate(this.querySelector('img'))"
+                onblur="undo()">
+            <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=600&q=80"
+                alt="Un lac entouré de montagnes verdoyantes"
+                onmouseover="upDate(this)"
+                onmouseleave="undo()">
+        </figure>
+
+        <figure onfocus="upDate(this.querySelector('img'))"
+                onblur="undo()">
+            <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=600&q=80"
+                alt="Une montagne enneigée sous un ciel étoilé"
+                onmouseover="upDate(this)"
+                onmouseleave="undo()">
+        </figure>
+
+        <figure onfocus="upDate(this.querySelector('img'))"
+                onblur="undo()">
+            <img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?auto=format&fit=crop&w=600&q=80"
+                alt="Un paysage naturel au lever du soleil"
+                onmouseover="upDate(this)"
+                onmouseleave="undo()">
+        </figure>
+
+        <figure onfocus="upDate(this.querySelector('img'))"
+                onblur="undo()">
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=600&q=80"
+                alt="Une forêt avec un chemin au milieu des arbres"
+                onmouseover="upDate(this)"
+                onmouseleave="undo()">
+        </figure>
+
+        <figure onfocus="upDate(this.querySelector('img'))"
+                onblur="undo()">
+            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80"
+                alt="De hautes montagnes sous les nuages"
+                onmouseover="upDate(this)"
+                onmouseleave="undo()">
+        </figure>
+
+    </div>
+
+    <script>
+
+        function upDate(previewPic) {
+            console.log("Événement déclenché");
+
+            document.getElementById("image").innerHTML = previewPic.alt;
+
+            document.getElementById("image").style.backgroundImage =
+                "url('" + previewPic.src + "')";
+        }
+
+        function undo() {
+            document.getElementById("image").innerHTML =
+                "Passez votre souris ou utilisez le clavier";
+
+            document.getElementById("image").style.backgroundImage = "url('')";
+        }
+
+        function addTabindex() {
+            console.log("Ajout des attributs tabindex");
+
+            let figures = document.querySelectorAll("figure");
+
+            for (let i = 0; i < figures.length; i++) {
+                figures[i].setAttribute("tabindex", "0");
+            }
+        }
+
+    </script>
+
+</body>
+</html>
